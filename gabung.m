@@ -18,7 +18,7 @@ end
 tidal=[data3 data4];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 idxn=strfind(flasc(i).name,'_as');
-save(sprintf('%s_allpass.mat'flasc(i).name(1:idxn-1)),'tidal');
+save(sprintf('%s_allpass.mat',flasc(i).name(1:idxn-1)),'tidal');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear data1 data2 data3 data4 tidal idxn
 end
