@@ -48,7 +48,7 @@ if (img==1)
     plot(long,lat,'k')
     axis ([90 155 -20 20])
     hold on
-    for i=1:5:20%ntrx
+    for i=1:ntrx
         %posisi footprint hasil colinear analysis - data dari .pos
         lintang=tidal(i).pos(:,1);
         bujur=tidal(i).pos(:,2);
