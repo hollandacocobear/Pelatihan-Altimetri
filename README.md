@@ -10,4 +10,7 @@ File-file yang disediakan disini ialah:
 4. **tidegen.m** : melakukan tidal estimate untuk mendapatkan amplitudo dan fase tiap konstituen pasang surut di setiap footprint
     *  **Catatan** : 
     *  **Subrutin** : tidal_estimate.m, lsa_tide.m, find_outliers_Thompson.m .
-5. **Remove_Empty_Pass.m** : 
+5. **Remove_Empty_Pass.m** : menghilangkan data NaN dan data kosong ([] ) di dalam pass dan footprint
+    *  **Catatan** : 
+    *  **Subrutin** : rempass.m, remfoot.m.
+6. **plot_lsa_tEstimate.m** : menampilkan grafik time series nilai SSH observasi dan prediksi, error SSH, dan tidal correlation tiap footprint pada track yang dipilih secara interaktif oleh user
