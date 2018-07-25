@@ -1,3 +1,24 @@
+%{
+Plot SSH observation, SSH prediction, Error, and Tidal Correlation between
+tides konstituents
+
+Input:
+- file : filename contains 'Tid_Est' in folder Out
+- corel : filename contains 'Tid_Corel' in folder Out
+- satelit : satelit name
+- dialog for display image (1:Yes 0:N0)
+- dialog for save image (1:Yes 0:N0)
+
+Output:
+- Plot SSH observation, SSH prediction, error, and tidal correlation
+- image file *.tiff
+
+
+22-Jul-2018 : first created by Hollanda
+25-Jul-2018 : Adding tidal correlation
+%}
+
+
 clc;
 close all;
 
@@ -105,66 +126,86 @@ if (img==1)
                 clear waktu
             end
         end
-        clear  idl idb
+        clear  idl idb 
     end
     %clear unneeded variable
-    clear ntrx
+    clear ntrx idxb idxl a b lintang bujur info_struct la la1 lo lo1 lonj lat j
     
     %Plot data observasi, prediksi, dan errornya
     for i=1:lenPass
         gambar
         %plot coordinate
-        subplot(2,2,3)
+        subplot(3,2,5)
         plot(long,lat,'k');
         hold on
         scatter(c_info(i).Position(1),c_info(i).Position(2),25,'g','filled')
         s=['Pass ' num2str(Pass(i)) ' Footprint ' num2str(footprint(i))];
-        text(c_info(i).Position(1)-5,c_info(i).Position(2)-1,s,'fontsize',8,'fontangle','italic','color',[0.2 0.2 0.6]);
+        text(c_info(i).Position(1)-5,c_info(i).Position(2)-2,s,'fontsize',8,'fontangle','italic','color',[0.2 0.2 0.6]);
         xlabel('Longitude (\circ)')
         ylabel('Latitude (\circ)')
         hold off
         axis equal
-        axis ([90 150 -15 15])
+        axis ([90 150 -20 20])
         grid on
         
-        %plot SSH observation and prediction with error
-        subplot (2,2,1)
+        %plot SSH observation and prediction
+        subplot (3,2,1)
         x=yr{i};
         y1=cell2mat(sshObs{1,i,1});%observation
         y2=cell2mat(yp{1,i,1});%prediction
         y3=y1-y2;
-        plot(x,y1,'-b');hold on
-        plot(x,y2,'-+m');
+        if(min(y1)<=min(y2));miny=min(y1);
+        else miny=min(y2);end
+        if(max(y1)>max(y2));maxy=max(y1);
+        else maxy=max(y2);end
+        
+        plot(x,y1,'-b','marker','.','markerfacecolor','k');hold on
+        plot(x,y2,'-m','marker','+','markerfacecolor','k');
+        ylim([floor(miny) floor(maxy)+1.5])
         xlabel('Year')
         ylabel('SSH (m)')
         legend('Observation','Prediction')
-        legend('location','best')
+        legend('location','northeast','orientation','horizontal')
         
-        subplot (2,2,2)
+        %plot error
+        subplot (3,2,3)
         plot(x,y3,'-r')
         xlabel('Year')
-        ylabel('Difference (m)')
-        clear x y1 y2 y3
+        ylabel('SSH Difference (m)')
+        clear x y1 y2 y3 miny maxy
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %TIDAL CORRELATION - korelasi antar konstanta pasut ,
         %Semakin tinggi nilai korelasi maka dapat diduga bahwa kedua konstanta
         %tersebut tidak bisa dipisahkan karena kurang dari rayleigh criterion
         amp=tidal(Pass(i)).amp(id_fp,:);
-        zu=find(amp~=0);
-        konstanta=tidal(Pass(i)).con(zu,1);
-        subplot (2,2,4)
-        %imagesc(R); %caxis([-1 1]);colorbar;colormap default;
+        zu=find(amp);
+        konstanta=tidal(Pass(i)).con(1,zu);
+        m=length(konstanta);
+        R=cell2mat(co_real{1,i}{1,1});
+        R=R(1:m,1:m);
+        clear amp zu
+        
+        subplot (3,2,[2,4,6])
+        imagesc(R); caxis([-1 1]);
+        set(gca,'ydir','normal');
         axis equal
-        title('Tidal Correlation','fontweight','bold','fontsize',15)
-        s=['Tidal analysis & correlation ' satelit];
+        axis([0 m+1 0 m+1])
+        set(gca,'xtick',(1:m))
+        set(gca,'xticklabel',(konstanta),'fontsize',10,'fontangle','italic')
+        set(gca,'ytick',(1:m))
+        set(gca,'yticklabel',(konstanta),'fontsize',10,'fontangle','italic')
+        title('Tidal Correlation','fontweight','bold','fontsize',15,'fontangle','normal')
+        colorbar;colormap default;
+        
         %Option to save figure
         if (simpan==1)
             %Make directory
+            s=['Tid_Anal&Correl ' satelit ' P' num2str(Pass(i)) ' F' num2str(footprint(i))];
             fg='../gambar/';
             mkdir(fg);
             F    = getframe(gcf);
-            imwrite(F.cdata, [fdir s], 'tif')
+            imwrite(F.cdata, [fg s '.tif'], 'tif')
             
         end
     end
