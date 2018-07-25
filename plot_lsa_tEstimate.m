@@ -129,7 +129,7 @@ if (img==1)
         clear  idl idb 
     end
     %clear unneeded variable
-    clear ntrx idxb idxl a b lintang bujur info_struct la la1 lo lo1 lonj lat j
+    clear ntrx idxb idxl a b lintang bujur info_struct la la1 lo lo1 lonj latj
     
     %Plot data observasi, prediksi, dan errornya
     for i=1:lenPass
