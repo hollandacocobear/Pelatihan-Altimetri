@@ -216,6 +216,7 @@ clear i j k q data m n
 img=input('Want to display the figure?(1=Yes;0=No)\n');
 if(img==1)
     simpan=input('Want to save the figure?(1=Yes;0=No)\n');
+    else simpan=0;
 end
 
 
