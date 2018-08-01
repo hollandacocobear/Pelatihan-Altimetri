@@ -13,8 +13,6 @@ every constituent in file ascending and descending into one file txt
 %19-Jul-2018 : first created by Muhammad Syahrullah F
 %31-Jul-2018 : add mkdir option by Hollanda
 
-
-
 %}
 
 function savedata(flasc,fldsc,name,ncol,numbcons)
@@ -55,7 +53,7 @@ alldat_pha3=alldat_pha2(idx2,:);
 
 clear idx idx2
 
-formatspec='%12.6f%12.6f%12.6f\n';
+formatspec='%12.6f %12.6f %12.6f\n';
 
 fname1=sprintf('%s_amp.txt',name);
 fname2=sprintf('%s_pha.txt',name);
