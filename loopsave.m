@@ -2,7 +2,7 @@
 
 %19-Jul-2018 : first created by Muhammad Syahrullah F
 %31-Jul-2018 : change folder directory for flasc and fldsc
-
+%01-Aug-2018 : changing formatspec using tab delimiter - Hollanda
 close all
 %clear
 clc
@@ -23,8 +23,8 @@ for j=1:length(flasc)
 	fprintf('saving matfile to txt ---> %s \n',flasc(j).name(1:idxn-1));
     
     %import data
-    %data1=importdata([fdir flasc(j).name]);
-    %data2=importdata([fdir fldsc(j).name]);
+    data1=importdata([fdir flasc(j).name]);
+    data2=importdata([fdir fldsc(j).name]);
 
 for i=1:lenCon
     %find constituent
