@@ -15,8 +15,8 @@ xOver='*_xover_*.mat';
 %choose z buffer
 darat=0; %in meter
 
-
 fdir='../Out/';
+fout='../OutF/';
 
 if(~exist('Estimate','var'))
     tipe='xOver';
@@ -87,7 +87,6 @@ for z=1:lenF
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
     %save filtered data
-    fout='../OutF/';
     if(~exist(fout,'dir'))
         mkdir(fout)
     end
