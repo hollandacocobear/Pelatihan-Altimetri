@@ -19,8 +19,12 @@ File-file yang disediakan disini ialah:
     *  **Subrutin** : rempass.m, remfoot.m.  
     *  **Output**   : grafik titik cross over, file .mat tiap konstituen
 8.  **Plot_Residu_Xover.m** : Plot ini digunakan untuk melihat error nilai amplitudo dan fase pada semua titik cross over
-9.  **loopsave.m** : digunakan untuk mengekspor data amplitude, phase, dan standar deviasi mode _Ascending_ dan _Descending_ ke        dalam satu teks file.
+9. **landmaskgebco.m** : digunakan untuk mengekstrak titik satelit altimetry yang berada di perairan berdasarkan data GEBCO sebagai batas darat laut.
+    *  **Catatan**  : tentukan file yang akan diekstrak (Estimate atau xover), tentukan nilai ketinggian/kedalaman sebagai batas darat-laut. data GEBCO diekstrak dan diletakkan di dalam folder yang sama dengan maskgebco.m
+    *  **Subrutin** : maskgebco.m.  
+    *  **Output**   : figure titik hasil filter GEBCO, mat file titik yang sudah difilter darat.
+10.  **loopsave.m** : digunakan untuk mengekspor data amplitude, phase, dan standar deviasi mode _Ascending_ dan _Descending_ ke        dalam satu teks file.
     *  **Subrutin** : rempass.m, findcons.m, savedata.m.  
     *  **Output**   : file teks amplitude, phase, dan standar deviasi tiap konstituen pasut
-10.  **savexover.m** : digunakan untuk mengekspor nilai residu amplitude, phase, dan diff resultan vektor tiap konstituen pasut di titik cross over
+11.  **savexover.m** : digunakan untuk mengekspor nilai residu amplitude, phase, dan diff resultan vektor tiap konstituen pasut di titik cross over
     *  **Output**   : file teks residu amplitude, residu phase, dan diff resultan vektor tiap konstituen pasut
