@@ -5,7 +5,11 @@ close all
 clear
 clc
 
-fdir='../Out1/';
+%choose one (comment using %. Delete % to uncomment variable
+%fname='*col*';
+fname='*xover*';
+
+fdir='../OutTxt/';
 fgraph='../GMT_Graphic/';
 fnc='../GMT_nc/';
 if (~exist(fgraph,'dir'))
@@ -15,7 +19,7 @@ if (~exist(fnc,'dir'))
     mkdir(fnc);
 end
 
-fname='*col*';
+
 fx=dir([fdir fname]);
 nfx=length(fx);
 
@@ -34,15 +38,16 @@ for i=1:nfx
         if (~strcmp(st1{i},st1{i-1}))
             p=p+1;
             str{p}=s;
-            fprintf('%s \t',s)
+            fprintf('%s\t',s)
         end
     end
-    
-
 end
     fprintf('\n ')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 for i=1:nfx
+    clear data mindata maxdata range IDs s nama jenis
     data=dlmread([fdir fx(i).name]);
     mindata=floor(min(data(:,3)));
     maxdata=round(max(data(:,3)));
@@ -60,27 +65,40 @@ for i=1:nfx
         satuan='meter';
     elseif(strcmp(jenis,'pha'))
         judul='PHASE';
-        satuan='degree';
+        satuan='radian';
     elseif(strcmp(jenis,'pha_std'))
         judul='STANDARD DEVIATION PHASE';
-        satuan='degree';
+        satuan='radian';
+    elseif(strcmp(jenis,'amp_residu'))
+        judul='AMPLITUDE RESIDU';
+        satuan='meter';
+    elseif(strcmp(jenis,'pha_residu'))
+        judul='PHASE RESIDU';
+        satuan='radian';
+    elseif(strcmp(jenis,'diff_Resultan'))
+        judul='DIFFERENCE RESULTAN VEKTOR';
+        satuan='meter';
     end
     
-    fprintf('%s %s\n',judul,s);
-    
-    if(range<=1)
-        interval=0.2;
-    elseif(range>1&&range<=10)
-        interval=2;
+    fprintf('%s %s --->%d - %d\n',judul,s,i,nfx);
+    %{
+    if(range<=3)
+        interval=0.5;
+    elseif(range>3&&range<=10)
+        interval=1;
     elseif(range>10&&range<=100)
         interval=20;
     elseif(range>100&&range<=1000)
         interval=200;
-    elseif(range>1000&&range<=2500)
+    elseif(range>1000&&range<=3000)
         interval=500;
-    else interval=1000;
+        elseif(range>3000&&range<=20000)
+        interval=1000;
+        elseif(range>20000&&range<=100000)
+        interval=10000;
+    else interval=50000;
     end
-    
+    %}
     %generate GMT batch file
     fname='gmt.bat';
     fid=fopen(fname,'w');
@@ -156,7 +174,7 @@ for i=1:nfx
     %Plot a gray or color scale-bar on maps
     fprintf(fid,'gmtset FONT_LABEL 16p,4\r\n');
     fprintf(fid,'gmtset MAP_LABEL_OFFSET -2c\r\n');
-    fprintf(fid,'psscale -Dx9/-1.5c/20c/0.50h -CColorpalet.cpt  -B%d -By+l%s -R -J -O  >>%%R%%\r\n',interval,satuan);
+    fprintf(fid,'psscale -Dx9/-1.5c/20c/0.50h -CColorpalet.cpt  -By+l%s -R -J -O  >>%%R%%\r\n',satuan);
     %-C > color palette to be used
     %-D > Defines the reference point on the map for the color scale using one of four coordinate systems
     %-B > Set annotation, tick, and gridline interval for the colorbar.
@@ -172,7 +190,7 @@ for i=1:nfx
     
     fclose(fid);
     
-    clear data
+    
     fprintf('running dos\n');
     [status,cmdout]=dos('gmt.bat'); %,'-echo'
     fprintf('done\n\n');
