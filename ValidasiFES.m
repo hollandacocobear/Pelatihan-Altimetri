@@ -13,6 +13,7 @@ subroutine:
 output:
 - Figure
 - mat file contain raw data, data FES2014, residu
+- Validation report
 
 01-08-2018 : first created by Hollanda Arief Kusuma
 03-08-2018 : adding option to obtain constituent interactive - Hollanda
@@ -62,13 +63,12 @@ end
 
 %%
 
-fid=fopen([fdir satelit ' Validation Report.txt'],'w');
-fprintf(fid,upper(['---   Validation Report Data ' satelit ' with FES2014   ---']));
-fprintf(fid,'\n');
-fprintf(fid,'\n');
+fid=fopen(['../OutValidation/' satelit ' Validation Report.txt'],'w');
+fprintf(fid,upper(['---   Validation Report Data ' satelit ' with FES2014   ---\r\n']));
+fprintf(fid,'\r\n');
 
 for i=1:length(cons)
-    fprintf(fid,'%d. TIDAL CONSTITUENT %s\n',i,cons{i});
+    fprintf(fid,'\r\n%d. TIDAL CONSTITUENT %s\r\n',i,cons{i});
     
     [Rawdata, data_fes2014, Residu]=validasi(fasc,fdsc,data1,data2,cons{i},satelit,fid);
     
@@ -81,9 +81,8 @@ for i=1:length(cons)
         save([fdir satelit '_' cons{i} '_valid.mat'],'Rawdata', 'data_fes2014', 'Residu');
     end
     
-    
     clear Rawdata data_fes2014 Residu
-    
 end
+
 fclose(fid);
 
