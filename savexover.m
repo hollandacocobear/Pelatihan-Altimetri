@@ -12,16 +12,14 @@ in file xOver into file txt
 %19-Jul-2018 : first created by Muhammad Syahrullah F
 %31-Jul-2018 : add mkdir option by Hollanda
 
-
-
 %}
 
 close all
 clear
 clc
 
-fdir='../Out/';
-fout='../Out1/';
+fdir='../OutF/';
+fout='../OutTxt/';
 if (~exist(fout,'dir'))
     mkdir(fout);
 end
