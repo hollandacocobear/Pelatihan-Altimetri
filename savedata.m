@@ -17,7 +17,7 @@ every constituent in file ascending and descending into one file txt
 
 function savedata(flasc,fldsc,name,ncol,numbcons)
 
-fout='../Out1/';
+fout='../OutTxt/';
 if (~exist(fout,'dir'))
     mkdir(fout);
 end
