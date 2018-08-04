@@ -23,8 +23,11 @@ File-file yang disediakan disini ialah:
     *  **Catatan**  : tentukan file yang akan diekstrak (Estimate atau xover), tentukan nilai ketinggian/kedalaman sebagai batas darat-laut. data GEBCO diekstrak dan diletakkan di dalam folder yang sama dengan maskgebco.m
     *  **Subrutin** : maskgebco.m.  
     *  **Output**   : figure titik hasil filter GEBCO, mat file titik yang sudah difilter darat.
-10.  **loopsave.m** : digunakan untuk mengekspor data amplitude, phase, dan standar deviasi mode _Ascending_ dan _Descending_ ke        dalam satu teks file.
+10.  **validasiFES.m** : digunakan untuk memvalidasi konstituen data altimetri dengan data FES2014.
+    *  **Subrutin** : validasi.m.  
+    *  **Output**   : grafik sebaran amplitude dan fase tiap konstituen data altimetri, FES2014, dan residu; file .mat berisikan data titik altimetri, FES2014, dan residu tiap konstituennya; validation report
+11.  **loopsave.m** : digunakan untuk mengekspor data amplitude, phase, dan standar deviasi mode _Ascending_ dan _Descending_ ke        dalam satu teks file.
     *  **Subrutin** : rempass.m, findcons.m, savedata.m.  
     *  **Output**   : file teks amplitude, phase, dan standar deviasi tiap konstituen pasut
-11.  **savexover.m** : digunakan untuk mengekspor nilai residu amplitude, phase, dan diff resultan vektor tiap konstituen pasut di titik cross over
+12.  **savexover.m** : digunakan untuk mengekspor nilai residu amplitude, phase, dan diff resultan vektor tiap konstituen pasut di titik cross over
     *  **Output**   : file teks residu amplitude, residu phase, dan diff resultan vektor tiap konstituen pasut
