@@ -31,3 +31,7 @@ File-file yang disediakan disini ialah:
     *  **Output**   : file teks amplitude, phase, dan standar deviasi tiap konstituen pasut
 12.  **savexover.m** : digunakan untuk mengekspor nilai residu amplitude, phase, dan diff resultan vektor tiap konstituen pasut di titik cross over
     *  **Output**   : file teks residu amplitude, residu phase, dan diff resultan vektor tiap konstituen pasut
+13.  **generateGMT.m** : digunakan untuk membuat GMT Batch file secara otomatis untuk menginterpolasi nilai amplitude, fase, standar deviasi, dan residu dari file col dan xover
+    *  **Output**   : gmt batch file, file nc dan gambar hasil interpolasi GMT
+14.  **plot_ncGMT.m** : digunakan untuk membuat grafik dari file nc
+    *  **Output**   : grafik sebaran spasial tiap file yang dipilih 
