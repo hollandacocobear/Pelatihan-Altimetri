@@ -18,7 +18,7 @@ Output:
 25-Jul-2018 : Adding tidal correlation
 %}
 
-
+clear
 clc;
 close all;
 
