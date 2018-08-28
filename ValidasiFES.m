@@ -17,6 +17,7 @@ output:
 
 01-08-2018 : first created by Hollanda Arief Kusuma
 03-08-2018 : adding option to obtain constituent interactive - Hollanda
+28-08-2018 : adding mkdir OutValidation by Ayu
 %}
 %%
 close all
@@ -62,7 +63,7 @@ end
 
 
 %%
-
+mkdir('../OutValidation');
 fid=fopen(['../OutValidation/' satelit ' Validation Report.txt'],'w');
 fprintf(fid,upper(['---   Validation Report Data ' satelit ' with FES2014   ---\r\n']));
 fprintf(fid,'\r\n');
